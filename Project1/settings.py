@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add your app name here
     'Project1_app',
+    'django_filters'
 ]
 
 # Add support for authenticating users

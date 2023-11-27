@@ -17,3 +17,6 @@ class Workout(models.Model):
 
     )
     GROUP = models.CharField(max_length=200, choices=CHOICES)
+
+    def __str__(self):
+        return self.TITLE

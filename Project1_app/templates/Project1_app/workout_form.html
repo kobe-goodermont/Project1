@@ -1,0 +1,20 @@
+{% extends "Project1_app/base_template.html" %}
+
+
+{% block content %}
+    <h2> Create Workout </h2>
+    <div class="row">
+        <div class="mol-md-6">
+            <div class="card card-body">
+                <form action ="" method ="POST">
+                    {%  csrf_token %}
+                    {{ form }}
+                    <br>
+                    <input type = "submit" name="submit" style="background-color: blue; color: white">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

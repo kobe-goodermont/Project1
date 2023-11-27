@@ -14,7 +14,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 <div class="container-fluid">
-<a class="navbar-brand" href="#">Navbar</a>
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 <div class="collapse navbar-collapse" id="navbarNav">
 <ul class="navbar-nav">
@@ -22,21 +21,46 @@
 <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="#">Menu 1</a>
+<a class="nav-link" href="{% url 'createWorkout' %}" style="color: blue">Create</a>
 </li>
-<li class="nav-item">
-<a class="nav-link" href="#">Menu 2</a>
-</li>
+
 </ul>
 </div>
 </div>
+    {%  if user.is_authenticated %}
+        <span style="color: blue">{{ request.user }}</span>
+        &nbsp
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+    {% endif %}
 </nav>
 
 
 <!-- add block content from html template -->
 {% block content %}
-
-
+    <H2>Workouts</H2>
+    <h4>Filter by Group:</h4>
+    <br>
+    <form method="GET">
+    {{ myFilter.form }}
+    <button class="btn btn-primary" type="submit"> Search </button>
+    </form>
+    <br>
+    <ul class = "list-group">
+        {% for i in workouts %}
+        <li class="list-group-item">
+            Workout: {{ i.TITLE }}
+            <br>
+            Group: {{ i.GROUP }}
+            <br>
+            Description: {{ i.DESCRIPTION }}
+            <br>
+            <a class="btn btn-primary" href="{%  url 'updateWorkout' i.id %}" role="button">update</a>
+            <a class="btn btn-primary btn-danger" href="{%  url 'deleteWorkout' i.id %}" role="button">delete</a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
 </div>
 </body>
